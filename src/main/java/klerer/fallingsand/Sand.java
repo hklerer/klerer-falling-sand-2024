@@ -3,8 +3,6 @@ package klerer.fallingsand;
 public class Sand {
 
     private int[][] field = new int[3][3];
-    private int x;
-    private int y;
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -33,16 +31,11 @@ public class Sand {
 
     public void fall() {
         // moves all sand down one square
-        if (get(x, y) == field[1][2]) {
-            field[y + 1][x + 1] = 1;
-        }
-        else if (get(x, y) == field[1][0]) {
-            field[y][x] = 0;
-            field[y][x + 1] = 1;
-        }
-        else {
-            field[y][x] = 0;
-            field[y][x + 1] = 1;
+        if (field[1][2] == 1) {
+            field[1][3] = 1;
+        } else if (field[1][0] == 1) {
+            field[1][0] = 0;
+            field[1][1] = 1;
         }
 
     }
