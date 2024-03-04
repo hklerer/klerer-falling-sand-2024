@@ -2,7 +2,9 @@ package klerer.fallingsand;
 
 public class Sand {
 
-    private int[][] field = new int[3][3];
+    private int intX = 3;
+    private int intY = 3;
+    private int[][] field = new int[intX][intY];
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -32,10 +34,10 @@ public class Sand {
     public void fall() {
         // moves all sand down one square
         if (field[1][2] == 1) {
-            field[1][3] = 1;
+            field[intY][intX + 1] = 1;
         } else if (field[1][0] == 1) {
             field[1][0] = 0;
-            field[1][1] = 1;
+            field[intY][intX + 1] = 1;
         }
 
     }
