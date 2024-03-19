@@ -33,13 +33,14 @@ public class Sand {
 
     public void fall() {
         // moves all sand down one square
-        if (field[1][2] == 1) {
-            field[intY][intX + 1] = 1;
-        } else if (field[1][0] == 1) {
-            field[1][0] = 0;
-            field[intY][intX + 1] = 1;
+        for (int y = field.length - 2; y >= 0; y--) {
+            for (int x = 0; x < field[y].length; x++) {
+                if (field[y][x] == 1 && field[y + 1][x] == 0) {
+                    field[y][x] = 0;
+                    field[y + 1][x] = 1;
+                }
+            }
         }
-
     }
 
 }
