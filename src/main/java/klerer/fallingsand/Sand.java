@@ -6,10 +6,17 @@ public class Sand {
 
     private final int[][] field;
 
-    private final Random random = new Random();
+    private final Random random;
 
     public Sand(int width, int height) {
         field = new int[height][width];
+        this.random = new Random();
+    }
+
+
+    public Sand(int width, int height, Random random) {
+        field = new int[height][width];
+        this.random = random;
     }
 
     public String toString() {
@@ -46,18 +53,29 @@ public class Sand {
                     if (field[y + 1][x] == 0) {
                         field[y][x] = 0;
                         field[y + 1][x] = 1;
+                        continue;
                     }
 
-                    // does the sand fall to the right?
-                    else if (field[y + 1][x + 1] == 0) {
-                        field[y][x] = 0;
-                        field[y + 1][x + 1] = 1;
-                    }
-
-                    // does the sand fall to the left?
-                    else if (field[y + 1][x - 1] == 0) {
-                        field[y][x] = 0;
-                        field[y + 1][x - 1] = 1;
+                    if (random.nextBoolean()) {
+                        if (field[y + 1][x + 1] == 0) {
+                            // does the sand fall to the right?
+                            field[y][x] = 0;
+                            field[y + 1][x + 1] = 1;
+                        } else if (field[y + 1][x - 1] == 0) {
+                            // does the sand fall to the left?
+                            field[y][x] = 0;
+                            field[y + 1][x - 1] = 1;
+                        }
+                    } else {
+                        if (field[y + 1][x - 1] == 0) {
+                            // does the sand fall to the left?
+                            field[y][x] = 0;
+                            field[y + 1][x - 1] = 1;
+                        } else if (field[y + 1][x + 1] == 0) {
+                            // does the sand fall to the right?
+                            field[y][x] = 0;
+                            field[y + 1][x + 1] = 1;
+                        }
                     }
                 }
             }
