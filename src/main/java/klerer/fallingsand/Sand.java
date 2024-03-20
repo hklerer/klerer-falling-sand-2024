@@ -56,26 +56,16 @@ public class Sand {
                         continue;
                     }
 
-                    if (random.nextBoolean()) {
-                        if (field[y + 1][x + 1] == 0) {
-                            // does the sand fall to the right?
-                            field[y][x] = 0;
-                            field[y + 1][x + 1] = 1;
-                        } else if (field[y + 1][x - 1] == 0) {
-                            // does the sand fall to the left?
-                            field[y][x] = 0;
-                            field[y + 1][x - 1] = 1;
-                        }
-                    } else {
-                        if (field[y + 1][x - 1] == 0) {
-                            // does the sand fall to the left?
-                            field[y][x] = 0;
-                            field[y + 1][x - 1] = 1;
-                        } else if (field[y + 1][x + 1] == 0) {
-                            // does the sand fall to the right?
-                            field[y][x] = 0;
-                            field[y + 1][x + 1] = 1;
-                        }
+                    boolean rightFirst = random.nextBoolean();
+                    int direction1 = rightFirst ? +1 : -1;
+                    int direction2 = rightFirst ? -1 : +1;
+
+                    if (field[y + 1][x + direction1] == 0) {
+                        field[y][x] = 0;
+                        field[y + 1][x + direction1] = 1;
+                    } else if (field[y + 1][x + direction2] == 0) {
+                        field[y][x] = 0;
+                        field[y + 1][x + direction2] = 1;
                     }
                 }
             }
