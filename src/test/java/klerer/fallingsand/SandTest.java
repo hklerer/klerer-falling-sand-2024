@@ -2,14 +2,14 @@ package klerer.fallingsand;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SandTest {
 
     @Test
     public void string() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
 
         // when
         String actual = sand.toString();
@@ -21,7 +21,7 @@ class SandTest {
     @Test
     public void put() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
 
         // when
         sand.put(1, 0);
@@ -34,7 +34,7 @@ class SandTest {
     @Test
     public void fall() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 0);
 
         // when
@@ -47,7 +47,7 @@ class SandTest {
     @Test
     public void fallOnGround() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 2);
 
         // when
@@ -58,23 +58,39 @@ class SandTest {
     }
 
     @Test
-    public void fallOnOtherSand() {
+    public void fallToTheRight() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 1);
         sand.put(1, 2);
+        sand.put(0, 2); // left
 
         // when
         sand.fall();
 
         // then
-        assertEquals("000\n010\n010\n", sand.toString());
+        assertEquals("000\n000\n111\n", sand.toString());
+    }
+
+    @Test
+    public void fallToTheLeft() {
+        // given
+        Sand sand = new Sand(3, 3);
+        sand.put(1, 1);
+        sand.put(1, 2);
+        sand.put(2, 2); // right
+
+        // when
+        sand.fall();
+
+        // then
+        assertEquals("000\n000\n111\n", sand.toString());
     }
 
     @Test
     public void fallSimultaneously() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 0);
         sand.put(1, 1);
 
