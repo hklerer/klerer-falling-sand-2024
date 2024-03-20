@@ -19,6 +19,15 @@ public class Sand {
         this.random = random;
     }
 
+    /**
+     * Adds random sand to our field
+     *
+     * @param n the amount of sand to add.
+     */
+    public void randomSand(int n) {
+
+    }
+
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (int y = 0; y < field.length; y++) {
@@ -42,6 +51,15 @@ public class Sand {
      */
     public void put(int x, int y) {
         field[y][x] = 1;
+    }
+
+
+    public int getWidth() {
+        return field[0].length;
+    }
+
+    public int getHeight() {
+        return field.length;
     }
 
     public void fall() {
