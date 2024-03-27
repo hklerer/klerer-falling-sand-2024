@@ -2,11 +2,12 @@ package klerer.fallingsand;
 
 import java.util.Random;
 
+import static java.lang.Math.min;
+
 public class Sand {
 
-    private final int[][] field;
-
     private final Random random;
+    private int[][] field;
 
     public Sand(int width, int height) {
         field = new int[height][width];
@@ -124,17 +125,55 @@ public class Sand {
     }
 
     public void resize(int width, int height) {
+        if (height == field.length && width == field[0].length) {
+            return;
+        }
+        int newField[][] = new int[height][width];
 
+        for (int y = 0; y < min(field.length, newField.length); y++) {
+            System.arraycopy(field[y], 0, newField[y], 0, min(field[y].length, newField[y].length));
+        }
+
+        field = newField;
     }
 
-    public void load(String sandString) {
-
+    public void load(String s) {
+        int y = 0;
+        int x = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            switch (c) {
+                case '\n' -> {
+                    y++;
+                    x = 0;
+                }
+                case '1' -> {
+                    field[y][x] = 1;
+                    x++;
+                }
+                case '0' -> {
+                    field[y][x] = 0;
+                    x++;
+                }
+            }
+        }
     }
 
-    // starting at x, y to x+width and y+height set each item in field to
-    // be a sand if random.nextDouble() <= probability
-    public void put(int x, int y, int width, int height, double probability) {
-
+    /**
+     * @param startX      top left of the rectangle
+     * @param startY      top left of the rectangle
+     * @param width
+     * @param height
+     * @param probability that an empty spot in the rectangle will be sand
+     */
+    public void put(int startX, int startY, int width, int height, double probability) {
+        for (int y = startY; y < startY + height; y++) {
+            for (int x = startX; x < startX + width; x++) {
+                if (random.nextDouble() <= probability) {
+                    field[y][x] = 1;
+                }
+            }
+        }
     }
 
 }

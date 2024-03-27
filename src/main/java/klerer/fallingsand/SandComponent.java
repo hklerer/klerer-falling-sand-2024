@@ -16,7 +16,7 @@ public class SandComponent extends JComponent {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                sand.put(e.getX(), e.getY());
+                sand.put(e.getX(), e.getY(), 10, 10, .3);
             }
 
             @Override
@@ -42,7 +42,7 @@ public class SandComponent extends JComponent {
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                sand.put(e.getX(), e.getY());
+                sand.put(e.getX(), e.getY(), 10, 10, .3);
             }
 
             @Override
@@ -56,6 +56,9 @@ public class SandComponent extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        sand.resize(getWidth(), getHeight());
+
+        // draw the sand
         sand.fall();
 
         g.setColor(Color.darkGray);
@@ -69,7 +72,7 @@ public class SandComponent extends JComponent {
         repaint();
 
         try {
-            Thread.sleep(50);
+            Thread.sleep(5);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
