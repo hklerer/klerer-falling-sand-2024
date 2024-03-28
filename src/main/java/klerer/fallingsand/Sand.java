@@ -63,6 +63,23 @@ public class Sand {
     }
 
     /**
+     * @param startX      top left of the rectangle
+     * @param startY      top left of the rectangle
+     * @param width
+     * @param height
+     * @param probability that an empty spot in the rectangle will be sand
+     */
+    public void put(int startX, int startY, int width, int height, double probability) {
+        for (int y = startY; y < startY + height; y++) {
+            for (int x = startX; x < startX + width; x++) {
+                if (random.nextDouble() <= probability) {
+                    field[y][x] = 1;
+                }
+            }
+        }
+    }
+
+    /**
      * moves the sand from x1, y1 to x2, y2
      *
      * @param x1
@@ -158,22 +175,4 @@ public class Sand {
             }
         }
     }
-
-    /**
-     * @param startX      top left of the rectangle
-     * @param startY      top left of the rectangle
-     * @param width
-     * @param height
-     * @param probability that an empty spot in the rectangle will be sand
-     */
-    public void put(int startX, int startY, int width, int height, double probability) {
-        for (int y = startY; y < startY + height; y++) {
-            for (int x = startX; x < startX + width; x++) {
-                if (random.nextDouble() <= probability) {
-                    field[y][x] = 1;
-                }
-            }
-        }
-    }
-
 }
